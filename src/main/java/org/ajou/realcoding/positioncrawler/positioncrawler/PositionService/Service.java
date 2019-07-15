@@ -32,30 +32,19 @@ public class Service {
     public List<Position> getPositionInfoByName(String summonerName)
     {
        String encryptedsummonerid =openpositionApiClient.requestSummoner(summonerName).getId();
-       List<Position> position =  openpositionApiClient.requestPosition(encryptedsummonerid); //여기에 문제가 있는듯 json을 넘겨주는과정에서
-      // String summonerId = position.getSummonerId();
+       List<Position> position =  openpositionApiClient.requestPosition(encryptedsummonerid);
 
-       /* int flag=0;
-        int i=0;
-        for(Position position1 : position)
-        {
-          if(encryptedsummonerid==position.get(i).getSummonerId())
-          {
-              flag++;
-          }
-          i++;
-        }
-        if(flag==1) //있으면 update
-        {
-            positionRepository.updatePositionInfo(encryptedsummonerid,position.get(0));
-        }
-        else //없으면 insert
-        {
-            positionRepository.insertPositionInfo(position);
-        }*/
-
-       positionRepository.insertPositionInfo(position);
-        return positionRepository.findPositionBySummonerNameInDB(encryptedsummonerid);
+       if(positionRepository.testpossiblityofupdate( encryptedsummonerid))
+       {
+           positionRepository.updatePositionInfo(encryptedsummonerid,position.get(0));
+           //리스트에서 첫번째꺼 가져와서 업데이트 . 당연히 리스트에는하나있을거니까 첫번째 받아오는게 맞음.
+       }
+       else
+       {
+           positionRepository.insertPositionInfo(position);
+       }
+        //positionRepository.insertPositionInfo(position);
+        return positionRepository.findPositioninfoBySummonerNameInDB(encryptedsummonerid);
     }
 
 }
