@@ -3,6 +3,7 @@ package org.ajou.realcoding.positioncrawler.positioncrawler.repository;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ajou.realcoding.positioncrawler.positioncrawler.domain.Position;
+import org.ajou.realcoding.positioncrawler.positioncrawler.domain.Summoner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -26,9 +27,9 @@ public class PositionRepository{ //db에 저장하고 찾는 부분.
         mongoTemplate.insert(position,Position.class );
     }//게임성적정보를 db에 저장
 
-    public void updatePositionInfo(String summonerId, Position position)
+    public void updatePositionInfo(String summonerId,Position position)
     {
-     Query query = Query.query(Criteria.where("summmonerId").is(summonerId));
+        Query query = Query.query(Criteria.where("summmonerId").is(summonerId));
         Update update = new Update();
 
         update.set("wins",position.getWins());
@@ -38,14 +39,20 @@ public class PositionRepository{ //db에 저장하고 찾는 부분.
         update.set("leaguePoints",position.getLeaguePoints());
         mongoTemplate.updateFirst(query,update,Position.class);
     }
-  
-    public List<Position> findPositionBySummonerNameInDB(String summonerId) //db에서 맞는 summoner이름 찾아서 게임성적정보 값리턴.
+
+    public List<Position> findPositioninfoBySummonerNameInDB(String summonerId) //db에서 맞는 summoner이름 찾아서 게임성적정보 값리턴.
     {
         Query query = Query.query(Criteria.where("summonerId").is(summonerId)); //summonerId?
         return mongoTemplate.find(query,Position.class);
 
     }//소환사이름으로 db에서 성적정보 찾아서 넘겨줌.
 
+    public boolean testpossiblityofupdate(String encryptedsummonerid)
+    {
+        Query query = Query.query(Criteria.where("summonerId").is(encryptedsummonerid));
+        return  mongoTemplate.exists(query,Position.class);
+        //있으면 t 없음 f 반환
+    }
 
 
 }
