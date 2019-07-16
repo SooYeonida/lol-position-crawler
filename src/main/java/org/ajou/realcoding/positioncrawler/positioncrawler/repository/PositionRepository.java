@@ -27,7 +27,7 @@ public class PositionRepository{ //db에 저장하고 찾는 부분.
         mongoTemplate.insert(position,Position.class );
     }//게임성적정보를 db에 저장
 
-    public void updatePositionInfo(String summonerId,Position position)
+   /* public void updatePositionInfo(String summonerId,Position position)
     {
         Query query = Query.query(Criteria.where("summmonerId").is(summonerId));
         Update update = new Update();
@@ -38,7 +38,7 @@ public class PositionRepository{ //db에 저장하고 찾는 부분.
         update.set("tier",position.getTier());
         update.set("leaguePoints",position.getLeaguePoints());
         mongoTemplate.updateFirst(query,update,Position.class);
-    }
+    }*/
 
     public List<Position> findPositioninfoBySummonerNameInDB(String summonerId) //db에서 맞는 summoner이름 찾아서 게임성적정보 값리턴.
     {
@@ -52,6 +52,12 @@ public class PositionRepository{ //db에 저장하고 찾는 부분.
         Query query = Query.query(Criteria.where("summonerId").is(encryptedsummonerid));
         return  mongoTemplate.exists(query,Position.class);
         //있으면 t 없음 f 반환
+    }
+
+    public void deleteOneinDB (String summonerId)
+    {
+        Query query = Query.query(Criteria.where("summonerId").is(summonerId));
+        mongoTemplate.remove(query,Position.class);
     }
 
 
