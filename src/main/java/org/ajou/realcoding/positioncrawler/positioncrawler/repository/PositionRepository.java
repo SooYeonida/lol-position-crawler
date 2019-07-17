@@ -69,7 +69,7 @@ public class PositionRepository{ //db에 저장하고 찾는 부분.
         update.set("tier",position.getTier());
         update.set("leaguePoints",position.getLeaguePoints());
 
-       // mongoTemplate.updateFirst()
+        mongoTemplate.updateFirst(query,update,Position.class);
     }
 
 
