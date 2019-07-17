@@ -15,7 +15,7 @@ import java.util.List;
 
 @Service
 public class OpenpositionApiClient {
-    private  final String appid = "RGAPI-c34a14cc-87c8-4c69-802f-cb97c3e7119a";
+    private  final String appid = "RGAPI-3d333023-0d24-4eb7-a9ee-10b367a0cbbc";
     private  final String openPositionUrl = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/{encryptedSummonerId}?api_key={appid}";
     private final String openSummonerUrl = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonerName}?api_key={appid}";
 
