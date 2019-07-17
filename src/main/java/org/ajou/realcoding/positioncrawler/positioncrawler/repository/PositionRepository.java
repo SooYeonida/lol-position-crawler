@@ -59,6 +59,18 @@ public class PositionRepository{ //db에 저장하고 찾는 부분.
         Query query = Query.query(Criteria.where("summonerId").is(summonerId));
         mongoTemplate.remove(query,Position.class);
     }
+    public void updateOneinDB(String summonerId,Position position)
+    {
+        Query query = Query.query(Criteria.where("summonerId").is(summonerId));
+        Update update = new Update();
+        update.set("wins",position.getWins());
+        update.set("losses",position.getLosses());
+        update.set("rank",position.getRank());
+        update.set("tier",position.getTier());
+        update.set("leaguePoints",position.getLeaguePoints());
+
+       // mongoTemplate.updateFirst()
+    }
 
 
 }
