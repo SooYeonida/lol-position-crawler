@@ -36,11 +36,13 @@ public class Service {
 
        if(positionRepository.testpossiblityofupdate(encryptedsummonerid))
        {
-           System.out.println("start delete and reinserting");
-          // positionRepository.updatePositionInfo(encryptedsummonerid,position.get(0));
-           //리스트에서 첫번째꺼 가져와서 업데이트 . 당연히 리스트에는하나있을거니까 첫번째 받아오는게 맞음.
-           positionRepository.deleteOneinDB(encryptedsummonerid);
-           positionRepository.insertPositionInfo(position);
+
+           positionRepository.updateOneinDB(encryptedsummonerid,position.get(0));
+           //리스트에서 첫번째꺼 가져와서 업데이트 . 당연히 리스트에는하나있을거니까 첫번째 받아오는게 맞음.4
+        
+           //  System.out.println("start delete and reinserting");
+           //positionRepository.deleteOneinDB(encryptedsummonerid);
+           //positionRepository.insertPositionInfo(position);
        }
        else
        {
