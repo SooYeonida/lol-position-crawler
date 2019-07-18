@@ -11,6 +11,6 @@ public class MongoConfig {
     @Bean
     public MongoTemplate createMongoTemplate()
     {
-        return new MongoTemplate(new MongoClient(), "league-position");
+        return new MongoTemplate(new MongoClient(), "league-position-db");
     }
 }
